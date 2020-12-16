@@ -1,16 +1,18 @@
-/*************************************************************/
-/* mytcpdump.c // use libcap0.8-dev and ubunt11.10(kern 3.0) */
-/* All source in one file: mytcpdump.c                       */
-/* To compile: gcc mytcpdump.c -o mytcpdump -lpcap           */
-/* To run(use device name): sudo ./mytcpdump eth0            */
-/* After a while for statistic info press: Ctrl + C          */
-/*                                                           */
-/*                                              Nazar Kozak  */
-/*************************************************************/
+/********************************************************************/
+/* mytcpdump.c // use libpcap0.8-dev and ubunt11.10(kern 3.0)       */
+/* All source in one file: mytcpdump.c                              */
+/* To compile: gcc mytcpdump.c -o mytcpdump -lpcap                  */
+/* To run(use device name): sudo ./mytcpdump eth0                   */
+/* After a while for statistic info press: Ctrl + C                 */
+/*                                                                  */
+/* to install libpcap use command: sudo apt-get install libpcap-dev */
+/*                                                                  */
+/*                                              Nazar Kozak         */
+/********************************************************************/
 
-/* For include MAC statistic                                 */
-#define RUN_MAC_STATISTIC 0                                  //
-#define DEBUG                                                //  
+/* For include MAC statistic                                        */
+#define RUN_MAC_STATISTIC 0                                         //
+#define DEBUG                                                       //  
 
 #include <pcap.h>
 #include <signal.h>
