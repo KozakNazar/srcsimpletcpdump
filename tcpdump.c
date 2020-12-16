@@ -63,8 +63,9 @@ u_int getIpOffset(pcap_t* interf) {
         case DLT_LINUX_SLL: 
             return 16;
 	default:
+	    perror("bad interface\n");
+	    //error("bad interface\n");		    
             return 14;
-	    error("bad interface\n");
     }
 
 }
