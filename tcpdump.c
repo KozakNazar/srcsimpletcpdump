@@ -18,7 +18,10 @@
 #include <signal.h>
 #include <string.h>
 #include <stdlib.h>
-#include <net/ethernet.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+//#include <net/ethernet.h>
+#include <netinet/ether.h>
 #include <netinet/ip.h> 
 
 
@@ -146,8 +149,8 @@ void packetHandler(u_char *args,const struct pcap_pkthdr* pkthdr,const u_char* p
     {
         eptr = (struct ether_header *) packet;
 #ifdef DEBUG
-        fprintf(stdout,"ethernet header source: %s", (char* )ether_ntoa(eptr->ether_shost));
-        fprintf(stdout," destination: %s ", (char* )ether_ntoa(eptr->ether_dhost));
+        fprintf(stdout,"ethernet header source: %s", (char* )ether_ntoa((const struct ether_addr *)eptr->ether_shost));
+        fprintf(stdout," destination: %s ", (char* )ether_ntoa((const struct ether_addr *)eptr->ether_dhost));
 #endif
         updateInfolist_MAC(eptr->ether_dhost, 0);
         updateInfolist_MAC(eptr->ether_shost, 1);
@@ -208,7 +211,8 @@ void packetHandler(u_char *args,const struct pcap_pkthdr* pkthdr,const u_char* p
 }
 
 static pcap_t* desrc = NULL;
-static int cleanup(int signo);
+static void cleanup(int signo);
+void (*sigset (int sig, void (*disp)(int)))(int);  // old
 
 int main(int argc,char **argv)
 {
@@ -247,7 +251,7 @@ void dumpCapturedInfo(void)
         printf("N: ----MAC--------------------------\n");
         for(i = 1; i <= last_new_MAC_number; i++)
         {
-            printf("%d: %s\n", i, (char* )ether_ntoa(infoList_MAC[i].MAC));
+            printf("%d: %s\n", i, (char* )ether_ntoa((const struct ether_addr *)infoList_MAC[i].MAC));
             printf("   rx/tx: (%d/%d)\n", infoList_MAC[i].count_in, infoList_MAC[i].count_out);
         }
 
@@ -269,7 +273,7 @@ void dumpCapturedInfo(void)
 
 }
 
-static int cleanup(int signo)
+static void cleanup(int signo)
 {
 #ifdef USE_WIN32_MM_TIMER
 	if (timer_id)
