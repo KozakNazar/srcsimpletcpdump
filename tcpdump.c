@@ -1,18 +1,19 @@
-/********************************************************************/
-/* mytcpdump.c // use libpcap0.8-dev and ubunt11.10(kern 3.0)       */
-/* All source in one file: mytcpdump.c                              */
-/* To compile: gcc mytcpdump.c -o mytcpdump -lpcap                  */
-/* To run(use device name): sudo ./mytcpdump eth0                   */
-/* After a while for statistic info press: Ctrl + C                 */
-/*                                                                  */
-/* to install libpcap use command: sudo apt-get install libpcap-dev */
-/*                                                                  */
-/*                                              Nazar Kozak         */
-/********************************************************************/
+/*********************************************************************************/
+/* mytcpdump.c // use libpcap0.8-dev and ubunt11.10(kern 3.0)                    */
+/* All source in one file: mytcpdump.c                                           */
+/* To compile use command: gcc mytcpdump.c -o mytcpdump -lpcap                   */
+/* To run(example for network interface eth0) use command: sudo ./mytcpdump eth0 */
+/* After a while for statistic info press: Ctrl + C                              */
+/*                                                                               */
+/* To install libpcap use command: sudo apt-get install libpcap-dev              */
+/* To get list network interfaces use command: ip link show                      */
+/*                                                                               */
+/*                                                           Nazar Kozak         */
+/*********************************************************************************/
 
-/* For include MAC statistic                                        */
-#define RUN_MAC_STATISTIC 0                                         //
-#define DEBUG                                                       //  
+/* For include MAC statistic                                                     */
+#define RUN_MAC_STATISTIC 0                                                      //
+#define DEBUG                                                                    //  
 
 #include <pcap.h>
 #include <signal.h>
