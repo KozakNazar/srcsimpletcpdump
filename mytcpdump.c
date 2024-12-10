@@ -23,7 +23,9 @@
 #include <sys/socket.h>
 //#include <net/ethernet.h>
 #include <netinet/ether.h>
-#include <netinet/ip.h> 
+#include <netinet/ip.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 
 typedef struct Info_MAC_ {
